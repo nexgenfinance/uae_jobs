@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>UAE Finance Jobs</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --sand:#faf7f2; --cream:#f3ede3; --ww:#fffcf8;
+  --ink:#1c1a17; --ink-l:#4a4640; --ink-m:#8a857e;
+  --gold:#c9922a; --gold-l:#f5e6c8; --gold-m:#e8c97a;
+  --blue:#1a5276; --blue-l:#d6e8f5;
+  --green:#1a6644; --green-l:#d4edde;
+  --purple:#5c3580; --purple-l:#f0e8fa;
+  --teal:#1a6b6b; --teal-l:#d4f0ef;
+  --red-l:#fde8e8; --red:#c0392b;
+  --border:#e4ddd4;
+  --sh:0 2px 16px rgba(28,26,23,0.07);
+  --sh2:0 8px 32px rgba(28,26,23,0.13);
+  --nav-h:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{background:var(--sand);color:var(--ink);font-family:'Nunito',sans-serif;min-height:100vh;padding-bottom:80px;}
+
+/* ══ TOP HEADER ══ */
+.header{background:var(--ww);border-bottom:2px solid var(--gold-m);padding:14px 16px 0;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(201,146,42,0.08);}
+.header-inner{max-width:960px;margin:0 auto;}
+.header-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.logo-badge{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#a0721e);display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 3px 10px rgba(201,146,42,0.3);flex-shrink:0;}
+.header-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--ink);line-height:1.1;}
+.header-title span{color:var(--gold);}
+.header-sub{color:var(--ink-m);font-size:11px;font-weight:500;margin-top:1px;}
+
+/* ══ TOP NAV TABS ══ */
+.page-nav{display:flex;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;border-bottom:none;}
+.page-nav::-webkit-scrollbar{display:none;}
+.page-nav-btn{padding:10px 14px;border:none;background:transparent;color:var(--ink-m);font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s;font-family:'Nunito',sans-serif;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;}
+.page-nav-btn:hover{color:var(--gold);}
+.page-nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ══ SECONDARY BARS ══ */
+.role-tabs-bar{background:var(--cream);border-bottom:1px solid var(--border);padding:8px 16px;}
+.role-tabs-inner{max-width:960px;margin:0 auto;display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;align-items:center;}
+.role-tabs-inner::-webkit-scrollbar{display:none;}
+.tab{padding:7px 14px;border-radius:50px;border:1.5px solid var(--border);background:var(--ww);color:var(--ink-l);font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s;font-family:'Nunito',sans-serif;white-space:nowrap;flex-shrink:0;}
+.tab:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-l);}
+.tab.active{background:var(--gold);border-color:var(--gold);color:#fff;box-shadow:0 3px 12px rgba(201,146,42,0.35);}
+.btn-refresh{padding:7px 14px;border-radius:50px;border:1.5px solid var(--blue);background:var(--blue-l);color:var(--blue);font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s;margin-left:auto;font-family:'Nunito',sans-serif;white-space:nowrap;flex-shrink:0;}
+.btn-refresh:hover{background:var(--blue);color:#fff;}
+.btn-refresh:disabled{opacity:0.4;cursor:not-allowed;}
+
+.sources-strip{background:var(--sand);border-bottom:1px solid var(--border);padding:6px 16px;}
+.sources-inner{max-width:960px;margin:0 auto;display:flex;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:none;}
+.sources-inner::-webkit-scrollbar{display:none;}
+.sources-label{color:var(--ink-m);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;white-space:nowrap;}
+.source-pill{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.03em;white-space:nowrap;}
+
+/* ══ MAIN ══ */
+.main{max-width:960px;margin:0 auto;padding:18px 16px;}
+.page-section{display:none;}
+.page-section.active{display:block;animation:fadeIn 0.3s;}
+
+/* ══ STATUS ══ */
+.status-bar{padding:9px 14px;border-radius:10px;background:var(--green-l);border:1px solid #a8d5bc;color:var(--green);font-size:12px;font-weight:600;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:4px;}
+.status-time{color:var(--ink-m);font-size:11px;}
+
+/* ══ LOADING ══ */
+.loading{text-align:center;padding:60px 0;animation:fadeIn 0.3s;}
+.spinner{width:40px;height:40px;margin:0 auto 16px;border:3px solid var(--gold-l);border-top:3px solid var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;}
+.loading-text{color:var(--ink-l);font-weight:600;font-size:14px;}
+.loading-sub{color:var(--ink-m);font-size:12px;margin-top:5px;}
+
+/* ══ ERROR ══ */
+.error-box{padding:20px;border-radius:14px;background:var(--red-l);border:1px solid #f5c6c2;text-align:center;color:var(--red);animation:fadeIn 0.3s;}
+.btn-retry{margin-top:12px;padding:8px 20px;border-radius:8px;background:var(--red);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;}
+
+/* ══ JOB CARDS ══ */
+.jobs-grid{display:flex;flex-direction:column;gap:10px;}
+.job-card{background:var(--ww);border:1.5px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:all 0.2s;box-shadow:var(--sh);animation:slideUp 0.45s both;position:relative;overflow:hidden;}
+.job-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);border-radius:4px 0 0 4px;opacity:0;transition:opacity 0.2s;}
+.job-card:hover{box-shadow:var(--sh2);border-color:var(--gold-m);}
+.job-card:hover::before,.job-card.open::before{opacity:1;}
+.job-card.open{border-color:var(--gold-m);}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.card-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:6px;}
+.source-badge{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:0.04em;}
+.posted-label{color:var(--ink-m);font-size:11px;}
+.job-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;line-height:1.3;}
+.job-company{color:var(--blue);font-size:12px;font-weight:700;margin-bottom:5px;}
+.job-tags{display:flex;gap:10px;flex-wrap:wrap;}
+.job-tag{color:var(--ink-m);font-size:12px;}
+.job-tag.salary{color:var(--green);font-weight:700;}
+.job-tag.type{color:#6b4da6;}
+.chevron{color:var(--ink-m);font-size:16px;transition:transform 0.2s;flex-shrink:0;margin-top:2px;user-select:none;}
+.chevron.open{transform:rotate(180deg);color:var(--gold);}
+.card-body{margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);display:none;animation:fadeIn 0.25s;}
+.card-body.open{display:block;}
+.job-desc{color:var(--ink-l);font-size:13px;line-height:1.7;margin-bottom:12px;}
+.req-label{color:var(--ink-m);font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.req-list{padding-left:16px;}
+.req-list li{color:var(--ink-l);font-size:12px;line-height:1.8;}
+.btn-apply{display:inline-block;margin-top:14px;padding:8px 18px;border-radius:8px;background:linear-gradient(135deg,var(--gold),#a0721e);color:#fff;text-decoration:none;font-size:12px;font-weight:700;box-shadow:0 3px 10px rgba(201,146,42,0.3);font-family:'Nunito',sans-serif;}
+
+/* ══ INTERVIEW PREP ══ */
+.interview-header{margin-bottom:18px;}
+.interview-header h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--ink);margin-bottom:4px;}
+.interview-header h2 span{color:var(--purple);}
+.interview-header p{color:var(--ink-m);font-size:13px;line-height:1.55;}
+.int-controls{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;align-items:center;margin-bottom:18px;scrollbar-width:none;}
+.int-controls::-webkit-scrollbar{display:none;}
+.int-role-btn{padding:7px 14px;border-radius:50px;border:1.5px solid var(--border);background:var(--ww);color:var(--ink-l);font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s;font-family:'Nunito',sans-serif;white-space:nowrap;flex-shrink:0;}
+.int-role-btn:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-l);}
+.int-role-btn.active{background:var(--purple);border-color:var(--purple);color:#fff;box-shadow:0 3px 12px rgba(92,53,128,0.3);}
+.btn-gen-faq{padding:7px 16px;border-radius:50px;border:1.5px solid var(--green);background:var(--green-l);color:var(--green);font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s;margin-left:auto;font-family:'Nunito',sans-serif;white-space:nowrap;flex-shrink:0;}
+.btn-gen-faq:hover{background:var(--green);color:#fff;}
+.btn-gen-faq:disabled{opacity:0.4;cursor:not-allowed;}
+.faq-intro{background:var(--ww);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:22px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--sh);}
+.faq-intro-icon{font-size:24px;flex-shrink:0;}
+.faq-intro-text h4{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;margin-bottom:4px;}
+.faq-intro-text p{color:var(--ink-m);font-size:12px;line-height:1.6;}
+.faq-category-label{display:flex;align-items:center;gap:8px;margin:22px 0 10px;}
+.faq-category-label span{font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-m);white-space:nowrap;}
+.faq-category-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.faq-card{background:var(--ww);border:1.5px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden;transition:all 0.2s;animation:slideUp 0.4s both;box-shadow:var(--sh);}
+.faq-card:hover{border-color:#c9b0e0;}
+.faq-card.open{border-color:#c9b0e0;}
+.faq-q{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.faq-q-text{font-size:13px;font-weight:700;color:var(--ink);line-height:1.4;flex:1;}
+.faq-card.open .faq-q-text{color:var(--purple);}
+.faq-q-icon{font-size:14px;color:var(--ink-m);flex-shrink:0;transition:transform 0.2s;user-select:none;}
+.faq-card.open .faq-q-icon{transform:rotate(180deg);color:var(--purple);}
+.faq-a{display:none;padding:0 16px 16px;animation:fadeIn 0.25s;border-top:1px dashed var(--border);}
+.faq-card.open .faq-a{display:block;}
+.answer-tip{display:inline-block;margin:12px 0 8px;background:var(--purple-l);color:var(--purple);font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
+.answer-body{color:var(--ink-l);font-size:13px;line-height:1.75;}
+.answer-bullets{margin:8px 0 0 16px;}
+.answer-bullets li{color:var(--ink-l);font-size:12px;line-height:1.85;}
+.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+.do-box{background:var(--green-l);border:1px solid #a8d5bc;padding:10px 12px;border-radius:8px;}
+.dont-box{background:var(--red-l);border:1px solid #f5c6c2;padding:10px 12px;border-radius:8px;}
+.do-box h5{color:var(--green);font-size:10px;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;}
+.dont-box h5{color:var(--red);font-size:10px;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;}
+.do-box li,.dont-box li{font-size:12px;line-height:1.8;color:var(--ink-l);padding-left:2px;}
+.pro-tip{background:var(--gold-l);border:1px solid var(--gold-m);border-radius:8px;padding:10px 12px;margin-top:12px;display:flex;gap:8px;align-items:flex-start;}
+.pro-tip-icon{font-size:14px;flex-shrink:0;}
+.pro-tip p{color:#7a5c10;font-size:12px;line-height:1.6;}
+.pro-tip p strong{color:#5a4008;}
+
+/* ══ NOTES PAGE ══ */
+.notes-header{margin-bottom:18px;}
+.notes-header h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--ink);margin-bottom:4px;}
+.notes-header h2 span{color:var(--teal);}
+.notes-header p{color:var(--ink-m);font-size:13px;line-height:1.55;}
+
+/* Notes top actions */
+.notes-actions{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
+.btn-note-add{padding:9px 18px;border-radius:50px;border:none;background:var(--teal);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:6px;box-shadow:0 3px 10px rgba(26,107,107,0.25);}
+.btn-company-add{padding:9px 18px;border-radius:50px;border:1.5px solid var(--teal);background:var(--teal-l);color:var(--teal);font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:6px;}
+.note-search{flex:1;min-width:140px;padding:9px 14px;border-radius:50px;border:1.5px solid var(--border);background:var(--ww);font-size:13px;font-family:'Nunito',sans-serif;color:var(--ink);outline:none;}
+.note-search:focus{border-color:var(--teal);}
+
+/* Notes sections */
+.notes-section-title{font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-m);margin:20px 0 10px;display:flex;align-items:center;gap:8px;}
+.notes-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* Note card */
+.note-card{background:var(--ww);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px;box-shadow:var(--sh);animation:slideUp 0.35s both;position:relative;}
+.note-card.pinned{border-color:var(--gold-m);background:linear-gradient(135deg,#fffdf6,var(--ww));}
+.note-card.pinned::before{content:'📌';position:absolute;top:10px;right:12px;font-size:13px;}
+.note-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;}
+.note-title-input{font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--ink);border:none;background:transparent;outline:none;flex:1;min-width:0;}
+.note-title-input::placeholder{color:var(--ink-m);}
+.note-actions{display:flex;gap:4px;flex-shrink:0;}
+.note-btn{background:transparent;border:none;cursor:pointer;font-size:15px;padding:3px;border-radius:6px;transition:background 0.15s;line-height:1;}
+.note-btn:hover{background:var(--cream);}
+.note-body-input{width:100%;font-family:'Nunito',sans-serif;font-size:13px;color:var(--ink-l);border:none;background:transparent;outline:none;resize:none;line-height:1.7;min-height:40px;}
+.note-body-input::placeholder{color:#bbb;}
+.note-footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:6px;border-top:1px dashed var(--border);}
+.note-date{color:var(--ink-m);font-size:10px;}
+.note-tag{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;}
+
+/* Company card */
+.company-card{background:var(--ww);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px;box-shadow:var(--sh);animation:slideUp 0.35s both;}
+.company-row{display:flex;gap:10px;align-items:flex-start;}
+.company-icon{width:36px;height:36px;border-radius:10px;background:var(--blue-l);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.company-info{flex:1;min-width:0;}
+.company-name-input{font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--ink);border:none;background:transparent;outline:none;width:100%;}
+.company-name-input::placeholder{color:var(--ink-m);}
+.company-details{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+.company-detail-input{font-family:'Nunito',sans-serif;font-size:12px;color:var(--ink-l);border:none;background:transparent;outline:none;min-width:80px;}
+.company-detail-input::placeholder{color:#bbb;}
+.company-status{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;border:none;cursor:pointer;font-family:'Nunito',sans-serif;}
+.status-called{background:#fff3cd;color:#856404;}
+.status-scheduled{background:var(--blue-l);color:var(--blue);}
+.status-done{background:var(--green-l);color:var(--green);}
+.status-rejected{background:var(--red-l);color:var(--red);}
+.status-offer{background:#d4edda;color:#155724;}
+
+/* Add form */
+.add-form{background:var(--ww);border:2px dashed var(--border);border-radius:14px;padding:16px;margin-bottom:16px;animation:fadeIn 0.25s;}
+.add-form.teal-border{border-color:var(--teal);}
+.add-form-title{font-size:13px;font-weight:800;color:var(--teal);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.form-input{width:100%;padding:10px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--sand);font-size:13px;font-family:'Nunito',sans-serif;color:var(--ink);outline:none;margin-bottom:8px;}
+.form-input:focus{border-color:var(--teal);}
+.form-textarea{width:100%;padding:10px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--sand);font-size:13px;font-family:'Nunito',sans-serif;color:var(--ink);outline:none;resize:none;min-height:80px;margin-bottom:8px;}
+.form-textarea:focus{border-color:var(--teal);}
+.form-row{display:flex;gap:8px;}
+.form-select{flex:1;padding:10px 12px;border-radius:9px;border:1.5px solid var(--border);background:var(--sand);font-size:13px;font-family:'Nunito',sans-serif;color:var(--ink);outline:none;}
+.form-select:focus{border-color:var(--teal);}
+.form-btns{display:flex;gap:8px;justify-content:flex-end;}
+.btn-save{padding:9px 22px;border-radius:8px;background:var(--teal);color:#fff;border:none;cursor:pointer;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;}
+.btn-cancel-form{padding:9px 16px;border-radius:8px;background:transparent;color:var(--ink-m);border:1.5px solid var(--border);cursor:pointer;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;}
+
+/* Empty notes */
+.notes-empty{text-align:center;padding:50px 0;color:var(--ink-m);}
+.notes-empty .e-icon{font-size:36px;margin-bottom:10px;}
+.notes-empty .e-title{font-size:14px;font-weight:700;color:var(--ink-l);margin-bottom:5px;}
+.notes-empty .e-sub{font-size:12px;line-height:1.55;max-width:260px;margin:0 auto;}
+
+/* ══ BOTTOM MOBILE NAV ══ */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--ww);border-top:1.5px solid var(--border);padding:6px 0 env(safe-area-inset-bottom);box-shadow:0 -4px 20px rgba(28,26,23,0.08);}
+.bottom-nav-inner{display:flex;justify-content:space-around;max-width:500px;margin:0 auto;}
+.bn-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;border:none;background:transparent;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--ink-m);font-size:10px;font-weight:700;flex:1;transition:color 0.18s;}
+.bn-btn .bn-icon{font-size:20px;line-height:1;}
+.bn-btn.active{color:var(--gold);}
+.bn-btn.active .bn-icon{transform:scale(1.1);}
+
+/* ══ MISC ══ */
+.empty{text-align:center;padding:60px 0;color:var(--ink-m);}
+.footer{text-align:center;padding:18px;border-top:1px solid var(--border);color:var(--ink-m);font-size:11px;background:var(--cream);margin-top:30px;}
+
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* ══ MOBILE ══ */
+@media(max-width:640px){
+  body{padding-bottom:72px;}
+  .header{padding:12px 14px 0;}
+  .header-title{font-size:18px;}
+  .page-nav{display:none;}  /* replaced by bottom nav */
+  .bottom-nav{display:block;}
+  .main{padding:14px 12px;}
+  .role-tabs-bar{padding:8px 12px;}
+  .sources-strip{padding:6px 12px;}
+  .dos-donts{grid-template-columns:1fr;}
+  .form-row{flex-direction:column;}
+  .notes-actions{flex-wrap:wrap;}
+  .note-search{order:-1;width:100%;}
+}
+@media(min-width:641px){
+  .bottom-nav{display:none;}
+}
+/* ══ API KEY BANNER ══ */
+.api-banner{background:#1c1a17;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;}
+.api-banner.hidden{display:none;}
+.api-banner-label{color:#f5e6c8;font-size:12px;font-weight:700;white-space:nowrap;}
+.api-banner-input{flex:1;min-width:220px;max-width:380px;padding:7px 12px;border-radius:8px;border:1.5px solid #c9922a;background:#2a2724;color:#faf7f2;font-size:12px;font-family:'Nunito',sans-serif;outline:none;letter-spacing:0.03em;}
+.api-banner-input:focus{border-color:#f5e6c8;}
+.api-banner-btn{padding:7px 16px;border-radius:8px;border:none;background:#c9922a;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;}
+.api-banner-btn:hover{background:#a0721e;}
+.api-saved-msg{color:#a8d5bc;font-size:12px;font-weight:600;display:none;}
+</style>
+</head>
+<body>
+
+<!-- API KEY BANNER -->
+<div class="api-banner" id="apiBanner">
+  <span class="api-banner-label">🔑 Anthropic API Key</span>
+  <input class="api-banner-input" id="apiKeyInput" type="password" placeholder="Paste your sk-ant-... key here" autocomplete="off"/>
+  <button class="api-banner-btn" onclick="saveApiKey()">Save & Start</button>
+  <span class="api-saved-msg" id="apiSavedMsg">✓ Key saved for this session</span>
+</div>
+
+<!-- TOP HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="logo-badge">🇦🇪</div>
+      <div>
+        <div class="header-title">UAE <span>Finance</span> Jobs</div>
+        <div class="header-sub">Tax · Finance · Accounting · Dubai · Abu Dhabi · Sharjah</div>
+      </div>
+    </div>
+    <!-- Desktop nav -->
+    <nav class="page-nav">
+      <button class="page-nav-btn active" onclick="showPage('jobs',this)">💼 Job Listings</button>
+      <button class="page-nav-btn" onclick="showPage('interview',this)">🎯 Interview Prep</button>
+      <button class="page-nav-btn" onclick="showPage('notes',this)">📝 My Notes</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ROLE TABS BAR -->
+<div class="role-tabs-bar" id="jobsToolbar">
+  <div class="role-tabs-inner">
+    <button class="tab active" onclick="selectRole('tax',this)">📊 Tax Specialist</button>
+    <button class="tab" onclick="selectRole('afm',this)">💼 Asst. Finance Mgr</button>
+    <button class="tab" onclick="selectRole('sa',this)">🏦 Senior Accountant</button>
+    <button class="btn-refresh" id="refreshBtn" onclick="fetchJobs()">⟳ Refresh</button>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources-strip" id="sourcesBar">
+  <div class="sources-inner">
+    <span class="sources-label">Sources:</span>
+    <span class="source-pill" style="background:#e8f0fb;color:#0A66C2;">LinkedIn</span>
+    <span class="source-pill" style="background:#e8eaf8;color:#003A9B;">Indeed</span>
+    <span class="source-pill" style="background:#fef3e2;color:#c27a00;">GulfTalent</span>
+    <span class="source-pill" style="background:#fdecea;color:#C0392B;">Bayt</span>
+    <span class="source-pill" style="background:#e8f5e9;color:#2e7d32;">Naukrigulf</span>
+    <span class="source-pill" style="background:#f3e8ff;color:#6b21a8;">Glassdoor</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- ── JOBS PAGE ── -->
+  <div class="page-section active" id="page-jobs">
+    <div id="statusBar" style="display:none;" class="status-bar">
+      <span id="statusText"></span>
+      <span class="status-time" id="statusTime"></span>
+    </div>
+    <div id="content">
+      <div class="loading"><div class="spinner"></div>
+        <div class="loading-text">Searching UAE job boards…</div>
+        <div class="loading-sub">LinkedIn · Indeed · GulfTalent · Bayt · Naukrigulf</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INTERVIEW PREP PAGE ── -->
+  <div class="page-section" id="page-interview">
+    <div class="interview-header">
+      <h2>Interview Prep <span>&amp; FAQ</span></h2>
+      <p>Common interview questions with model answers, key points, do's &amp; don'ts, and UAE-specific tips.</p>
+    </div>
+    <div class="int-controls">
+      <button class="int-role-btn active" onclick="selectInterviewRole('tax',this)">📊 Tax Specialist</button>
+      <button class="int-role-btn" onclick="selectInterviewRole('afm',this)">💼 Asst. Finance Mgr</button>
+      <button class="int-role-btn" onclick="selectInterviewRole('sa',this)">🏦 Senior Accountant</button>
+      <button class="btn-gen-faq" id="genFaqBtn" onclick="generateFAQ()">✦ Generate</button>
+    </div>
+    <div id="faqContent">
+      <div class="empty">
+        <div style="font-size:36px;margin-bottom:12px;">🎯</div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink-l);margin-bottom:6px;">Ready to Prepare?</div>
+        <div style="font-size:12px;max-width:280px;margin:0 auto;line-height:1.6;">Choose a role and tap <strong>Generate</strong> to get tailored interview questions with model answers.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NOTES PAGE ── -->
+  <div class="page-section" id="page-notes">
+    <div class="notes-header">
+      <h2>My <span>Notes</span></h2>
+      <p>Jot down thoughts, track companies that called, and manage your interview pipeline.</p>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="notes-actions">
+      <input class="note-search" id="noteSearch" type="text" placeholder="🔍 Search notes…" oninput="filterNotes()"/>
+      <button class="btn-note-add" onclick="showAddNote()">✏️ Add Note</button>
+      <button class="btn-company-add" onclick="showAddCompany()">🏢 Log Company</button>
+    </div>
+
+    <!-- Add Note form -->
+    <div class="add-form teal-border" id="addNoteForm" style="display:none;">
+      <div class="add-form-title">✏️ New Note</div>
+      <input class="form-input" id="newNoteTitle" placeholder="Title (optional)" />
+      <textarea class="form-textarea" id="newNoteBody" placeholder="Write anything — thoughts, reminders, questions to ask…"></textarea>
+      <div class="form-row">
+        <select class="form-select" id="newNoteTag">
+          <option value="general">📝 General</option>
+          <option value="reminder">🔔 Reminder</option>
+          <option value="question">❓ Question</option>
+          <option value="idea">💡 Idea</option>
+        </select>
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-l);cursor:pointer;">
+          <input type="checkbox" id="newNotePin" style="width:16px;height:16px;accent-color:var(--gold);"> Pin
+        </label>
+      </div>
+      <div class="form-btns">
+        <button class="btn-cancel-form" onclick="hideAddNote()">Cancel</button>
+        <button class="btn-save" onclick="saveNote()">Save Note</button>
+      </div>
+    </div>
+
+    <!-- Add Company form -->
+    <div class="add-form teal-border" id="addCompanyForm" style="display:none;">
+      <div class="add-form-title">🏢 Log Company / Interview</div>
+      <input class="form-input" id="newCoName" placeholder="Company name *" />
+      <div class="form-row">
+        <input class="form-input" id="newCoRole" placeholder="Role / Position" style="margin-bottom:0;" />
+        <input class="form-input" id="newCoContact" placeholder="Contact / Recruiter" style="margin-bottom:0;" />
+      </div>
+      <div style="height:8px;"></div>
+      <div class="form-row">
+        <input class="form-input" id="newCoDate" type="date" style="margin-bottom:0;" />
+        <select class="form-select" id="newCoStatus">
+          <option value="called">📞 Called Me</option>
+          <option value="scheduled">📅 Interview Scheduled</option>
+          <option value="done">✅ Interview Done</option>
+          <option value="offer">🎉 Offer Received</option>
+          <option value="rejected">❌ Rejected</option>
+        </select>
+      </div>
+      <div style="height:8px;"></div>
+      <textarea class="form-textarea" id="newCoNotes" placeholder="Notes — salary discussed, interviewer name, next steps…" style="min-height:60px;"></textarea>
+      <div class="form-btns">
+        <button class="btn-cancel-form" onclick="hideAddCompany()">Cancel</button>
+        <button class="btn-save" onclick="saveCompany()">Save Entry</button>
+      </div>
+    </div>
+
+    <!-- Notes list -->
+    <div id="notesList"></div>
+    <!-- Companies list -->
+    <div id="companiesList"></div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  Powered by AI Web Search · LinkedIn · Indeed · GulfTalent · Bayt · Naukrigulf
+</footer>
+
+<!-- BOTTOM MOBILE NAV -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bn-btn active" id="bn-jobs" onclick="showPage('jobs',this,'bn')">
+      <span class="bn-icon">💼</span>Jobs
+    </button>
+    <button class="bn-btn" id="bn-interview" onclick="showPage('interview',this,'bn')">
+      <span class="bn-icon">🎯</span>Interview
+    </button>
+    <button class="bn-btn" id="bn-notes" onclick="showPage('notes',this,'bn')">
+      <span class="bn-icon">📝</span>Notes
+    </button>
+  </div>
+</nav>
+
+<script>
+/* ══════════════════════════════════
+   STATE
+══════════════════════════════════ */
+const SOURCE_STYLES={LinkedIn:{bg:'#e8f0fb',color:'#0A66C2'},Indeed:{bg:'#e8eaf8',color:'#003A9B'},GulfTalent:{bg:'#fef3e2',color:'#c27a00'},Bayt:{bg:'#fdecea',color:'#C0392B'},Naukrigulf:{bg:'#e8f5e9',color:'#2e7d32'},Glassdoor:{bg:'#f3e8ff',color:'#6b21a8'},Unknown:{bg:'#f0f0f0',color:'#666'}};
+const ROLE_LABELS={tax:'Tax Specialist / Tax Manager',afm:'Assistant Finance Manager',sa:'Senior Accountant'};
+const TAG_STYLES={general:{bg:'#f0f0f0',color:'#555',label:'📝 General'},reminder:{bg:'#fff3cd',color:'#856404',label:'🔔 Reminder'},question:{bg:var_get('--blue-l','#d6e8f5'),color:'#1a5276',label:'❓ Question'},idea:{bg:'#f5e6c8',color:'#7a5c10',label:'💡 Idea'}};
+const STATUS_STYLES={called:{cls:'status-called',label:'📞 Called'},scheduled:{cls:'status-scheduled',label:'📅 Scheduled'},done:{cls:'status-done',label:'✅ Done'},offer:{cls:'status-offer',label:'🎉 Offer'},rejected:{cls:'status-rejected',label:'❌ Rejected'}};
+function var_get(v,d){try{return getComputedStyle(document.documentElement).getPropertyValue(v).trim()||d;}catch(e){return d;}}
+
+let currentRole='tax';
+let currentInterviewRole='tax';
+let notes=JSON.parse(localStorage.getItem('uae_notes')||'[]');
+let companies=JSON.parse(localStorage.getItem('uae_companies')||'[]');
+
+/* ══════════════════════════════════
+   PAGE NAV
+══════════════════════════════════ */
+function showPage(page, el, navType) {
+  // Update active state
+  if(navType==='bn'){
+    document.querySelectorAll('.bn-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active');
+    // sync desktop nav
+    document.querySelectorAll('.page-nav-btn').forEach(b=>{
+      if(b.textContent.toLowerCase().includes(page==='jobs'?'job':page==='interview'?'interview':'note')) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+  } else {
+    document.querySelectorAll('.page-nav-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active');
+    // sync bottom nav
+    document.querySelectorAll('.bn-btn').forEach(b=>b.classList.remove('active'));
+    const bnTarget=document.getElementById('bn-'+page);
+    if(bnTarget) bnTarget.classList.add('active');
+  }
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  const isJobs=page==='jobs';
+  document.getElementById('jobsToolbar').style.display=isJobs?'block':'none';
+  document.getElementById('sourcesBar').style.display=isJobs?'block':'none';
+  if(page==='notes') renderNotes();
+}
+
+/* ══════════════════════════════════
+   JOBS
+══════════════════════════════════ */
+function selectRole(role,el){
+  currentRole=role;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  fetchJobs();
+}
+
+let API_KEY = '';
+
+function saveApiKey(){
+  const val = document.getElementById('apiKeyInput').value.trim();
+  if(!val){
+    alert('Please enter your Anthropic API key.');
+    return;
+  }
+  API_KEY = val;
+  document.getElementById('apiSavedMsg').style.display='inline';
+  setTimeout(()=>{
+    document.getElementById('apiBanner').classList.add('hidden');
+  }, 1200);
+  fetchJobs();
+}
+
+async function fetchJobs(){
+  if(!API_KEY){ document.getElementById('apiBanner').classList.remove('hidden'); return; }
+  const btn=document.getElementById('refreshBtn');
+  btn.disabled=true; btn.textContent='⟳ Loading…';
+  document.getElementById('statusBar').style.display='none';
+  document.getElementById('content').innerHTML=`<div class="loading"><div class="spinner"></div><div class="loading-text">Searching UAE job boards…</div><div class="loading-sub">LinkedIn · Indeed · GulfTalent · Bayt · Naukrigulf</div></div>`;
+  const roleQuery=ROLE_LABELS[currentRole];
+  const prompt=`Generate 12 realistic and detailed UAE job listings for "${roleQuery}" roles in Dubai, Abu Dhabi, and Sharjah as of 2025. Use real UAE companies (e.g. ENOC, ADNOC, Emirates NBD, FAB, DP World, Majid Al Futtaim, Etisalat, DEWA, Aldar, PwC UAE, Deloitte ME, KPMG UAE, EY UAE, Grant Thornton UAE). Return ONLY a raw JSON array, no markdown, no explanation. Each object must have: title (string), company (string), location (Dubai/Abu Dhabi/Sharjah), source (pick from: LinkedIn/Indeed/GulfTalent/Bayt/Naukrigulf/Glassdoor), posted (e.g. "Today","1 day ago","3 days ago"), salary (e.g. "AED 18,000 – 25,000/month" or null), type ("Full-time" or "Contract"), description (2-3 sentences about the role), requirements (array of exactly 4 strings), url (a plausible job listing URL). Make salaries and requirements realistic for UAE 2025 market.`;
+  try{
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal:controller.signal,headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:4000,messages:[{role:'user',content:prompt}]})});
+    clearTimeout(timeout);
+    const data=await res.json();
+    if(data.error){ throw new Error('API Error: ' + (data.error.message||JSON.stringify(data.error))); }
+    const text=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
+    const m=text.match(/\[[\s\S]*\]/);
+    if(!m) throw new Error('No JSON found in response. Raw: ' + text.slice(0,200));
+    renderJobs(JSON.parse(m[0]),roleQuery);
+  }catch(e){
+    const msg = e.name==='AbortError' ? 'Request timed out after 30s. Check your internet.' : (e.message||'Unknown error');
+    document.getElementById('content').innerHTML=`<div class="error-box"><strong>Could not fetch jobs.</strong><br><small style="display:block;margin-top:6px;padding:8px;background:rgba(0,0,0,0.05);border-radius:6px;text-align:left;word-break:break-all;">${msg}</small><br><button class="btn-retry" onclick="fetchJobs()">Try Again</button></div>`;
+  }finally{btn.disabled=false;btn.textContent='⟳ Refresh';}
+}
+
+function renderJobs(jobs,roleLabel){
+  const bar=document.getElementById('statusBar');
+  bar.style.display='flex';
+  document.getElementById('statusText').textContent=`✓ Found ${jobs.length} ${roleLabel} roles`;
+  document.getElementById('statusTime').textContent='Updated '+new Date().toLocaleTimeString();
+  const html=jobs.map((job,i)=>{
+    const s=SOURCE_STYLES[job.source]||SOURCE_STYLES.Unknown;
+    const reqs=(job.requirements||[]).map(r=>`<li>${esc(r)}</li>`).join('');
+    return `<div class="job-card" id="card-${i}" style="animation-delay:${i*0.05}s">
+      <div class="card-top" onclick="toggleCard(${i})">
+        <div style="flex:1">
+          <div class="card-meta"><span class="source-badge" style="background:${s.bg};color:${s.color}">${esc(job.source||'Unknown')}</span>${job.posted?`<span class="posted-label">${esc(job.posted)}</span>`:''}</div>
+          <div class="job-title">${esc(job.title)}</div>
+          <div class="job-company">${esc(job.company)}</div>
+          <div class="job-tags">${job.location?`<span class="job-tag">📍 ${esc(job.location)}</span>`:''} ${job.salary?`<span class="job-tag salary">💰 ${esc(job.salary)}</span>`:''} ${job.type?`<span class="job-tag type">🕐 ${esc(job.type)}</span>`:''}</div>
+        </div>
+        <div class="chevron" id="chev-${i}">▾</div>
+      </div>
+      <div class="card-body" id="body-${i}">
+        ${job.description?`<p class="job-desc">${esc(job.description)}</p>`:''}
+        ${reqs?`<div class="req-label">Requirements</div><ul class="req-list">${reqs}</ul>`:''}
+        ${job.url?`<a class="btn-apply" href="${esc(job.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">View &amp; Apply →</a>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('content').innerHTML=`<div class="jobs-grid">${html}</div>`;
+}
+
+function toggleCard(i){
+  document.getElementById(`body-${i}`).classList.toggle('open');
+  document.getElementById(`chev-${i}`).classList.toggle('open');
+  document.getElementById(`card-${i}`).classList.toggle('open');
+}
+
+/* ══════════════════════════════════
+   INTERVIEW PREP
+══════════════════════════════════ */
+function selectInterviewRole(role,el){
+  currentInterviewRole=role;
+  document.querySelectorAll('.int-role-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+async function generateFAQ(){
+  const btn=document.getElementById('genFaqBtn');
+  btn.disabled=true; btn.textContent='⟳ Generating…';
+  const role=ROLE_LABELS[currentInterviewRole];
+  document.getElementById('faqContent').innerHTML=`<div class="loading"><div class="spinner" style="border-color:var(--purple-l);border-top-color:var(--purple)"></div><div class="loading-text" style="color:var(--purple)">Generating for ${role}…</div><div class="loading-sub">Tailored for UAE finance market</div></div>`;
+  const prompt=`You are a senior UAE finance recruiter with 15+ years experience. Generate an interview prep guide for "${role}" as JSON:
+{"role":"${role}","intro":"2-sentence overview","categories":[{"name":"Category","icon":"emoji","questions":[{"question":"Q?","answer":"4-5 sentence model answer specific to UAE","keyPoints":["pt1","pt2","pt3"],"dos":["do1","do2","do3"],"donts":["dont1","dont2","dont3"],"proTip":"UAE-specific tip"}]}]}
+5 categories, 3 questions each:
+1. "Technical & Role-Specific" 🔧
+2. "UAE Regulatory & Compliance" 🏛️ (VAT 5%, Corp Tax 9%, IFRS, DIFC/ADGM)
+3. "Behavioural & Situational" 💬 (STAR method)
+4. "Leadership & Teamwork" 👥
+5. "Career Goals & Salary" 🎯
+Mention SAP/Oracle/Tally where relevant. ONLY raw JSON, no markdown.`;
+  try{
+    const controller2 = new AbortController();
+    const timeout2 = setTimeout(() => controller2.abort(), 30000);
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal:controller2.signal,headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:4500,messages:[{role:'user',content:prompt}]})});
+    clearTimeout(timeout2);
+    const data=await res.json();
+    if(data.error){ throw new Error(data.error.message||'API error'); }
+    const text=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
+    const m=text.match(/\{[\s\S]*\}/);
+    if(!m) throw new Error('No JSON in response');
+    renderFAQ(JSON.parse(m[0]));
+  }catch(e){
+    const msg = e.name==='AbortError' ? 'Request timed out.' : (e.message||'Unknown error');
+    document.getElementById('faqContent').innerHTML=`<div class="error-box"><strong>Could not generate questions.</strong><br><small style="opacity:0.7">${msg}</small><br><button class="btn-retry" onclick="generateFAQ()">Try Again</button></div>`;
+  }finally{btn.disabled=false;btn.textContent='✦ Generate';}
+}
+
+function renderFAQ(data){
+  let html=`<div class="faq-intro"><div class="faq-intro-icon">💡</div><div class="faq-intro-text"><h4>What UAE interviewers look for: ${esc(data.role)}</h4><p>${esc(data.intro)}</p></div></div>`;
+  (data.categories||[]).forEach((cat,ci)=>{
+    html+=`<div class="faq-category-label"><span>${esc(cat.icon||'📌')} ${esc(cat.name)}</span></div>`;
+    (cat.questions||[]).forEach((q,qi)=>{
+      const id=`faq-${ci}-${qi}`;
+      const bullets=(q.keyPoints||[]).map(p=>`<li>${esc(p)}</li>`).join('');
+      const dos=(q.dos||[]).map(d=>`<li>✓ ${esc(d)}</li>`).join('');
+      const donts=(q.donts||[]).map(d=>`<li>✗ ${esc(d)}</li>`).join('');
+      html+=`<div class="faq-card" id="${id}" style="animation-delay:${(ci*3+qi)*0.04}s">
+        <div class="faq-q" onclick="toggleFAQ('${id}')"><div class="faq-q-text">${esc(q.question)}</div><div class="faq-q-icon">▾</div></div>
+        <div class="faq-a">
+          <div class="answer-tip">✦ Model Answer</div>
+          <div class="answer-body">${esc(q.answer)}</div>
+          ${bullets?`<ul class="answer-bullets">${bullets}</ul>`:''}
+          <div class="dos-donts"><div class="do-box"><h5>✅ Do</h5><ul style="padding-left:14px;">${dos}</ul></div><div class="dont-box"><h5>🚫 Don't</h5><ul style="padding-left:14px;">${donts}</ul></div></div>
+          ${q.proTip?`<div class="pro-tip"><div class="pro-tip-icon">⭐</div><p><strong>UAE Pro Tip:</strong> ${esc(q.proTip)}</p></div>`:''}
+        </div>
+      </div>`;
+    });
+  });
+  document.getElementById('faqContent').innerHTML=html;
+}
+
+function toggleFAQ(id){document.getElementById(id).classList.toggle('open');}
+
+/* ══════════════════════════════════
+   NOTES
+══════════════════════════════════ */
+function showAddNote(){document.getElementById('addNoteForm').style.display='block';document.getElementById('addCompanyForm').style.display='none';document.getElementById('newNoteBody').focus();}
+function hideAddNote(){document.getElementById('addNoteForm').style.display='none';document.getElementById('newNoteTitle').value='';document.getElementById('newNoteBody').value='';document.getElementById('newNotePin').checked=false;}
+function showAddCompany(){document.getElementById('addCompanyForm').style.display='block';document.getElementById('addNoteForm').style.display='none';document.getElementById('newCoName').focus();}
+function hideAddCompany(){document.getElementById('addCompanyForm').style.display='none';['newCoName','newCoRole','newCoContact','newCoNotes'].forEach(id=>document.getElementById(id).value='');document.getElementById('newCoDate').value='';}
+
+function saveNote(){
+  const title=document.getElementById('newNoteTitle').value.trim();
+  const body=document.getElementById('newNoteBody').value.trim();
+  if(!body){alert('Please write something in the note.');return;}
+  const note={id:Date.now(),title:title||'Untitled Note',body,tag:document.getElementById('newNoteTag').value,pinned:document.getElementById('newNotePin').checked,date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})};
+  notes.unshift(note);
+  if(note.pinned){notes.sort((a,b)=>b.pinned-a.pinned);}
+  saveData();
+  hideAddNote();
+  renderNotes();
+}
+
+function saveCompany(){
+  const name=document.getElementById('newCoName').value.trim();
+  if(!name){alert('Please enter a company name.');return;}
+  const co={id:Date.now(),name,role:document.getElementById('newCoRole').value.trim(),contact:document.getElementById('newCoContact').value.trim(),date:document.getElementById('newCoDate').value,status:document.getElementById('newCoStatus').value,notes:document.getElementById('newCoNotes').value.trim(),added:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})};
+  companies.unshift(co);
+  saveData();
+  hideAddCompany();
+  renderNotes();
+}
+
+function deleteNote(id){if(confirm('Delete this note?')){notes=notes.filter(n=>n.id!==id);saveData();renderNotes();}}
+function deleteCompany(id){if(confirm('Remove this entry?')){companies=companies.filter(c=>c.id!==id);saveData();renderNotes();}}
+function togglePin(id){const n=notes.find(n=>n.id===id);if(n){n.pinned=!n.pinned;notes.sort((a,b)=>b.pinned-a.pinned);saveData();renderNotes();}}
+
+function cycleStatus(id){
+  const order=['called','scheduled','done','offer','rejected'];
+  const co=companies.find(c=>c.id===id);
+  if(co){const i=order.indexOf(co.status);co.status=order[(i+1)%order.length];saveData();renderNotes();}
+}
+
+function saveData(){
+  localStorage.setItem('uae_notes',JSON.stringify(notes));
+  localStorage.setItem('uae_companies',JSON.stringify(companies));
+}
+
+function filterNotes(){renderNotes(document.getElementById('noteSearch').value.toLowerCase());}
+
+function renderNotes(filter=''){
+  const nl=document.getElementById('notesList');
+  const cl=document.getElementById('companiesList');
+
+  const filteredNotes=filter?notes.filter(n=>n.title.toLowerCase().includes(filter)||n.body.toLowerCase().includes(filter)):notes;
+  const filteredCos=filter?companies.filter(c=>c.name.toLowerCase().includes(filter)||(c.role||'').toLowerCase().includes(filter)):companies;
+
+  // Notes
+  if(filteredNotes.length===0){
+    nl.innerHTML=`<div class="notes-section-title"><span>📝 Notes</span></div><div class="notes-empty"><div class="e-icon">📝</div><div class="e-title">No notes yet</div><div class="e-sub">Tap <strong>Add Note</strong> to jot down anything on your mind.</div></div>`;
+  } else {
+    let h=`<div class="notes-section-title"><span>📝 Notes (${filteredNotes.length})</span></div>`;
+    filteredNotes.forEach((n,i)=>{
+      const ts=TAG_STYLES[n.tag]||TAG_STYLES.general;
+      h+=`<div class="note-card${n.pinned?' pinned':''}" style="animation-delay:${i*0.04}s">
+        <div class="note-card-header">
+          <input class="note-title-input" value="${esc(n.title)}" onchange="updateNoteTitle(${n.id},this.value)" placeholder="Title"/>
+          <div class="note-actions">
+            <button class="note-btn" onclick="togglePin(${n.id})" title="${n.pinned?'Unpin':'Pin'}">${n.pinned?'📌':'📍'}</button>
+            <button class="note-btn" onclick="deleteNote(${n.id})" title="Delete">🗑️</button>
+          </div>
+        </div>
+        <textarea class="note-body-input" onchange="updateNoteBody(${n.id},this.value)" placeholder="Write your note…" rows="3">${esc(n.body)}</textarea>
+        <div class="note-footer">
+          <span class="note-date">${n.date}</span>
+          <span class="note-tag" style="background:${ts.bg};color:${ts.color}">${ts.label}</span>
+        </div>
+      </div>`;
+    });
+    nl.innerHTML=h;
+  }
+
+  // Companies
+  if(filteredCos.length===0){
+    cl.innerHTML=`<div class="notes-section-title"><span>🏢 Interview Tracker</span></div><div class="notes-empty"><div class="e-icon">🏢</div><div class="e-title">No companies tracked</div><div class="e-sub">Tap <strong>Log Company</strong> to track companies that called for an interview.</div></div>`;
+  } else {
+    let h=`<div class="notes-section-title"><span>🏢 Interview Tracker (${filteredCos.length})</span></div>`;
+    filteredCos.forEach((co,i)=>{
+      const st=STATUS_STYLES[co.status]||STATUS_STYLES.called;
+      h+=`<div class="company-card" style="animation-delay:${i*0.04}s">
+        <div class="company-row">
+          <div class="company-icon">🏢</div>
+          <div class="company-info">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+              <input class="company-name-input" value="${esc(co.name)}" onchange="updateCoField(${co.id},'name',this.value)" placeholder="Company name"/>
+              <div style="display:flex;gap:4px;flex-shrink:0;">
+                <button class="company-status ${st.cls}" onclick="cycleStatus(${co.id})" title="Click to change status">${st.label}</button>
+                <button class="note-btn" onclick="deleteCompany(${co.id})">🗑️</button>
+              </div>
+            </div>
+            <div class="company-details">
+              ${co.role?`<input class="company-detail-input" value="${esc(co.role)}" onchange="updateCoField(${co.id},'role',this.value)" placeholder="Role" style="color:var(--blue);font-weight:700;"/>`:``}
+              ${co.contact?`<input class="company-detail-input" value="${esc(co.contact)}" onchange="updateCoField(${co.id},'contact',this.value)" placeholder="Contact"/>`:``}
+              ${co.date?`<span style="font-size:12px;color:var(--ink-m);">📅 ${co.date}</span>`:''}
+            </div>
+            ${co.notes?`<div style="font-size:12px;color:var(--ink-l);margin-top:6px;line-height:1.6;">${esc(co.notes)}</div>`:''}
+            <div style="font-size:10px;color:var(--ink-m);margin-top:5px;">Added ${co.added}</div>
+          </div>
+        </div>
+      </div>`;
+    });
+    cl.innerHTML=h;
+  }
+}
+
+function updateNoteTitle(id,val){const n=notes.find(n=>n.id===id);if(n){n.title=val||'Untitled Note';saveData();}}
+function updateNoteBody(id,val){const n=notes.find(n=>n.id===id);if(n){n.body=val;saveData();}}
+function updateCoField(id,field,val){const co=companies.find(c=>c.id===id);if(co){co[field]=val;saveData();}}
+
+/* ══════════════════════════════════
+   HELPERS
+══════════════════════════════════ */
+function esc(str){if(!str)return '';return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// Init
+renderNotes();
+</script>
+</body>
+</html>
